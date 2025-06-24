@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { v4 as uuid } from "uuid"; // Importing uuid for unique IDs
-import { useContext } from "react";
-import { AppContext } from "./App"; // Importing the context from App.jsx
-import CartSection from "./CartSection.jsx";
+import { AppContext } from "../App.jsx"; // Importing the context from App.jsx
+import { ThemeContext } from "../ThemeContext.jsx";
 
 export default function Header({
-const [cart] = useContext(AppContext), // Using useContext to access the AppContext
-
   data: { addTask, setSortOption, sortOption },
 }) {
+  const [cart] = useContext(AppContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const name = "Guest";
   const [newTaskName, setNewTaskName] = useState("");
 
   function handleAddTask(e) {
@@ -22,14 +22,22 @@ const [cart] = useContext(AppContext), // Using useContext to access the AppCont
     };
 
     addTask(newTask); // Call the addTask function passed from App.jsx
+    setNewTaskName(""); // Clear the input field after adding the task
   }
 
   return (
     <div>
-      <h1>Items in cart: {cart}</h1>
-      <h1>To-Do List</h1>
+      <h1>{name}'s To Do List</h1>
+      <h2>Times you have clicked Add to cart button: {cart}</h2>
+      <button onClick={toggleTheme}>
+        {theme === "light" ? "Dark" : "Light"}
+      </button>
       <form onSubmit={handleAddTask}>
-        <input type="text" onChange={(e) => setNewTaskName(e.target.value)} />
+        <input
+          type="text"
+          value={newTaskName}
+          onChange={(e) => setNewTaskName(e.target.value)}
+        />
         <button type="submit">Submit Task</button>
       </form>
       <select

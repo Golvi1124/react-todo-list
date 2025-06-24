@@ -2,11 +2,12 @@ import Header from "./components/Header.jsx";
 import CartSection from "./components/CartSection.jsx";
 import ToDoList from "./components/ToDoList.jsx";
 import { useState, useEffect, createContext } from "react";
-export const AppContext = createContext();
+import { ThemeProvider } from "./ThemeContext.jsx";
+
+export const AppContext = createContext(); // Create a context to share state across components
 
 function App() {
-
-const [cart, setCart] = useState(0);
+  const [cart, setCart] = useState(0);
 
   const [todoData, setTodoData] = useState(() => {
     // call back and return will be initial state in UseState
@@ -67,12 +68,13 @@ const [cart, setCart] = useState(0);
     });
 
   return (
-    <>
-      <AppContext.Provider value={[ cart, setCart ]}>
-      <Header data={{ addTask, sortOption, setSortOption }} />
-      <ToDoList data={{ sortedData, editTask, deleteTask }} />
+    <ThemeProvider>
+      <AppContext.Provider value={[cart, setCart]}>
+        <Header data={{ addTask, sortOption, setSortOption }} />
+        <CartSection />
+        <ToDoList data={{ sortedData, editTask, deleteTask }} />
       </AppContext.Provider>
-    </>
+    </ThemeProvider>
   );
 }
 
