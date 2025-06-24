@@ -1,12 +1,21 @@
-# React + Vite
+# React To-Do List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple to-do list application built with **React** and **Vite**. It showcases React hooks, context, and client-side persistence via `localStorage`.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add, edit and delete tasks
+- Mark tasks as completed
+- Sort tasks by date or alphabetically
+- Hide completed tasks
+- Toggle between light and dark themes
+- "Add to Cart" button that demonstrates shared state via React context
+- Data persists across refreshes using `localStorage`
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `src/App.jsx` – root component that manages application state
+- `src/components/` – individual components (header, list, items, cart)
+- `src/ThemeContext.jsx` – light/dark theme context provider
+- `src/global.css` – global styles shared across components
+- `index.html` – entry HTML file for Vite
