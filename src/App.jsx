@@ -1,8 +1,13 @@
 import Header from "./components/Header.jsx";
+import CartSection from "./components/CartSection.jsx";
 import ToDoList from "./components/ToDoList.jsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
+export const AppContext = createContext();
 
 function App() {
+
+const [cart, setCart] = useState(0);
+
   const [todoData, setTodoData] = useState(() => {
     // call back and return will be initial state in UseState
     const savedData = localStorage.getItem("todoData");
@@ -63,8 +68,10 @@ function App() {
 
   return (
     <>
+      <AppContext.Provider value={[ cart, setCart ]}>
       <Header data={{ addTask, sortOption, setSortOption }} />
       <ToDoList data={{ sortedData, editTask, deleteTask }} />
+      </AppContext.Provider>
     </>
   );
 }

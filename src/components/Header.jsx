@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid"; // Importing uuid for unique IDs
+import { useContext } from "react";
+import { AppContext } from "./App"; // Importing the context from App.jsx
+import CartSection from "./CartSection.jsx";
 
 export default function Header({
+const [cart] = useContext(AppContext), // Using useContext to access the AppContext
+
   data: { addTask, setSortOption, sortOption },
 }) {
   const [newTaskName, setNewTaskName] = useState("");
@@ -21,6 +26,7 @@ export default function Header({
 
   return (
     <div>
+      <h1>Items in cart: {cart}</h1>
       <h1>To-Do List</h1>
       <form onSubmit={handleAddTask}>
         <input type="text" onChange={(e) => setNewTaskName(e.target.value)} />
